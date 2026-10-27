@@ -13,6 +13,7 @@
 
 
 variable "vpc_config" {
+  description = "The VPC cidr_block and name of the VPC to be created"
   type = object({
     cidr_block = string
     name       = string
@@ -26,6 +27,14 @@ variable "vpc_config" {
 }
 
 variable "subnet_config" {
+  description = <<EOT
+  Accepts a map of the subnet config.  Each subnet should have:
+  cidr_block: The CIDR block of the subnet
+  az: The az of the subnet
+
+  Optionally:
+  public: true, if this subnet is to be a public subnet.  Default is private subnet.
+  EOT
   type = map(object({
     cidr_block = string
     public     = optional(bool, false)
